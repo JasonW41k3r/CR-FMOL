@@ -16,7 +16,7 @@ from mpl_toolkits.axes_grid1.inset_locator import (inset_axes, InsetPosition,
 
 
 def ewm_average(olist): # smoothing the plot
-    length = len(olist)
+    length = len(olist)#11111111
     x = np.arange(0,length)
     df = pd.DataFrame({'x': x, 'y': olist})
     avg_list = df.y.ewm(span=50).mean()
