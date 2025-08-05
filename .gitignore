@@ -5,6 +5,7 @@ __pycache__/
 
 #IDE
 .idea
+./logs
 
 # C extensions
 *.so
