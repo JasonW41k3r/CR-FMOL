@@ -1,5 +1,5 @@
 # FedMGDA
-This is an repository of main code and experiments for the paper *Federated Multi-Objective Learning with Controlled Pareto Frontiers*
+This is an repository of main code and experiments for our paper *Federated Multi-Objective Learning with Controlled Pareto Frontiers*
 
 Experiments can be produced on MNIST, Fashion MNIST, CIFAR10 and Adult (both IID and non-IID). 
 
