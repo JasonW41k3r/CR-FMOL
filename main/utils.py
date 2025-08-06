@@ -198,3 +198,43 @@ def solve_capped_w(U,C=1):
     alpha = quadprog.solve_qp(Q,p,A,b_concat,meq=1)[0]
     print(alpha)
     return alpha
+
+# 头部 import 区
+import math                     # ← 新增
+import numpy as np              # ← 新增
+import quadprog                 # pip install quadprog
+
+# ------------------------------------------------------------------
+def solve_cone_w(grads_flat, lam_deg=30.0, tol=1e-6, max_iter=50):
+    """
+    CPF-FMOL: 在 simplex ∩ Ω_C(λ) 上求解权重 α
+    grads_flat: list[np.ndarray]  每客户端展平梯度
+    return     : np.ndarray       α_i ≥0, Σα=1
+    """
+    n = len(grads_flat)
+    lam = math.radians(lam_deg)
+    e0  = np.ones(n) / math.sqrt(n)                    # 偏好基向量
+
+    # === 1. 先用 MGDA (QuadProg) 求无约束 α* ========================
+    K = np.vstack(grads_flat).astype(np.float32)      # 同样效果
+    Q = (K @ K.T).astype(np.float64)  # quadprog 需要 float64
+    p = np.zeros(n)
+    A = np.vstack([np.ones(n), np.eye(n)]).T
+    b = np.concatenate(([1.0], np.zeros(n)))
+    alpha = quadprog.solve_qp(Q, p, A, b, meq=1)[0]    # shape (n,)
+    d = K.shape[1]  # 参数维度
+    e0 = np.ones(d, dtype=np.float32) / math.sqrt(d)
+    # === 2. 若违背锥形约束，使用 Frank-Wolfe 投影 ===============
+    def agg_grad(a):           # Σα_i g_i
+        return np.tensordot(a, K, axes=1)
+
+    for _ in range(max_iter):
+        g = agg_grad(alpha)  # shape (d,)
+        cos_theta = np.dot(g, e0) / np.linalg.norm(g)  # ‖e0‖==1
+        if cos_theta >= math.cos(lam) - tol:
+            break
+        # 选取最靠近 e0 的顶点方向
+        c = K @ (e0 - g)
+        alpha = np.zeros_like(alpha)
+        alpha[np.argmin(c)] = 1.0
+    return alpha

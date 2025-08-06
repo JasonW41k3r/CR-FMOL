@@ -70,7 +70,14 @@ def args_parser():
                                                                     qffl with q=0 reduces to FedAvg")
     parser.add_argument('--Lipschitz_constant', type=float, default=1.0)
 
+    parser.add_argument('--method', type=str, default='mgda',
+                             help = '[mgda | capmgda | fmgda | crfol]')  # ← 新算法标记
 
+    # ---------- CPF-FMOL 专用超参 ----------
+    parser.add_argument('--cone-angle', type=float, default=30,
+                             help = 'λ (degrees) — 偏好锥半张角')
+    parser.add_argument('--pref-mode', type=str, default='static',
+                             choices = ['static', 'adaptive'], help = 'static: 固定 λ；adaptive: 每 N 轮自动调节 λ')
 
     # other arguments
     parser.add_argument('--dataset', type=str, default='cifar', help="name \
