@@ -8,7 +8,7 @@ import argparse
 def args_parser():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--inference', type=int, default=0,
+    parser.add_argument('--inference', type=int, default=1,
                         help="Do inference during training for recording more advance information")
 
     # federated arguments (Notation for the arguments followed from paper)
