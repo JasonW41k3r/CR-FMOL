@@ -76,3 +76,31 @@ The default values for various paramters parsed to the experiment are given in `
 * ```--local_ep:``` Number of local training epochs in each user. Default is 10.
 * ```--local_bs:``` Batch size of local updates in each user. Default is 10.
 * ```--unequal:```  Used in non-iid setting. Option to split the data amongst users equally or unequally. Default set to 0 for equal splits. Set to 1 for unequal splits.
+...
+
+## Acknowledgement & Attribution
+We would like to give our **highest respect and gratitude** to the authors of the paper  
+*“Federated Learning Meets Multi-Objective Optimization”* (Hu *et al.*, IEEE T-NSE 2022).  
+The overall algorithmic framework and part of our codebase (e.g. data-preparation script structure, FedMGDA implementation skeleton, argument parser style) are **heavily inspired by the public repository** released by the paper’s authors <https://github.com/watml/Fed-MGDA>.  
+Our work extends it with the proposed **CR-FMOL** method, additional fairness metrics, and extensive ablation studies. Any merits of this repository are built on top of their solid foundation; all remaining issues are solely our responsibility.
+
+This repository is released under the **GPL-3.0 license** (see `LICENSE`), strictly following the license of the upstream project.  
+If you use our code, please also cite Hu *et al.* (2022) **and** our accompanying paper:
+
+```bibtex
+@article{hu2022fedmgda,
+  title={Federated Learning Meets Multi-Objective Optimization},
+  author={Hu, Zeou and Shaloudegi, Kiarash and Zhang, Guojun and Yu, Yaoliang},
+  journal={IEEE Transactions on Network Science and Engineering},
+  year={2022},
+  volume={9},
+  number={4},
+  pages={2039--2054}
+}
+@inproceedings{your2025crfmol,
+  title={Federated Multi-Objective Learning with Controlled Pareto Frontiers},
+  author={<Your Author List>},
+  booktitle={Proceedings of ...},
+  year={2025}
+}
+
