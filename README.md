@@ -97,10 +97,9 @@ If you use our code, please also cite Hu *et al.* (2022) **and** our accompanyin
   number={4},
   pages={2039--2054}
 }
-@inproceedings{your2025crfmol,
-  title={Federated Multi-Objective Learning with Controlled Pareto Frontiers},
-  author={<Your Author List>},
-  booktitle={Proceedings of ...},
-  year={2025}
+@inproceedings{rao2025crfmol,
+  title     = {Federated Multi-Objective Learning with Controlled Pareto Frontiers},
+  author    = {Rao, Jiansheng and Gong, Zhizhi and Li, Jiayi},
+  year      = {2025},
 }
 
